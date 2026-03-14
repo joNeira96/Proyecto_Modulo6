@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dinamica</title>
+
+
+<h2>Vista dinámica funcionando con EJS</h2>
+
+<p>Esta página fue generada dinámicamente por el servidor.</p>
+
+
+<a href="/estatico.html">Ver página estática</a>
+
+<script>
+async function verEstado() {
+
+    const respuesta = await fetch("/status");
+    const data = await respuesta.json();
+
+    document.getElementById("resultado").textContent =
+        JSON.stringify(data, null, 2);
+}
+</script>
+
+</body>
+</html>

@@ -47,8 +47,6 @@ Leccion 3
 
 A continuación, se incorporan y configuran paquetes esenciales para el desarrollo de aplicaciones backend.
 
----
-
 Dependencias utilizadas
 
 1. Express

@@ -87,3 +87,23 @@ el módulo fs, registrando accesos en log.txt con fecha, hora y ruta.
 Utilizamos EJS como motor de plantillas para generar vistas dinámicas y
 se organizó el proyecto utilizando rutas externas para mejorar la
 estructura del código.
+
+
+________________________________________________
+
+ Ejecución del servidor
+
+1 . Abrir la carpeta del proyecto con Visual Studio Code
+2. Luego abrir la Terminal Git Bash
+y ejecutamos: 
+npm run dev
+
+3. Debe aparecer lo siguiente si la entrada fue existosa: 
+
+El servidor se ejecutará en:
+
+http://localhost:3000
+
+4. Hacer click en el servidor para visualizar la página dinámica que tambien puede dirigirte a la página estática. 
+
+______________________________________________________

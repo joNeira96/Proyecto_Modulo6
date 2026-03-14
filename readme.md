@@ -1,7 +1,7 @@
 Evaluación del módulo 6
 Proyecto: Node & Express Web App 
 
-Leccion 1 
+
 
 Comenzaremos la presentacion de este proyecto conociendo Node y Express para comprender su entorno y el rol que cumplen en el desarrollo de el backend moderno. 
 
@@ -37,13 +37,12 @@ Cliente recibe respuesta
 Y es así como estas dos herramientas se complementan permitiendonos, simplificar el trabajo en nuestras aplicaciones webs 
 
 
-Leccion 2
 
 Por que se eligió "app.js"? 
 
 Como se puede apreciar en el código, decidí utilizar "app.js" como nombre del archivo personal, porque posteriormente, se solciita crear una vista dinamica, la cual llamé index.ejs y considerando las buenas prácticas entre desarrolladores y la comprensión del proyecto no quise duplicar nombres de archivos.  
 
-Leccion 3 
+
 
 A continuación, se incorporan y configuran paquetes esenciales para el desarrollo de aplicaciones backend.
 

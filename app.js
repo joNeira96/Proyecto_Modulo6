@@ -1,5 +1,5 @@
 require("dotenv").config();
-const sequelize = require("./src/config/database");
+const sequelize = require("./src/config/database.js");
 
 const express = require("express");
 const app = express();
@@ -17,3 +17,6 @@ app.use(routes);
 app.listen(PORT, () => {
     console.log(`Servidor iniciado en http://localhost:${PORT}`);
 });
+
+
+sequelize.sync();

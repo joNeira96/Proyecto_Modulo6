@@ -23,3 +23,7 @@
 14/3/2026 - 17:02:35 - Ruta: /
 14/3/2026 - 17:02:47 - Ruta: /
 14/3/2026 - 17:04:26 - Ruta: /
+13/4/2026 - 11:03:17 - Ruta: POST /usuarios
+13/4/2026 - 11:05:29 - Ruta: /usuarios
+13/4/2026 - 11:06:19 - Ruta: PUT /usuarios
+13/4/2026 - 11:07:07 - Ruta: DELETE /usuarios

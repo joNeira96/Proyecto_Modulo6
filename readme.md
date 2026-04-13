@@ -212,3 +212,136 @@ Durante este proyecto logramos integrar una base de datos real a la aplicación,
 
 Además, se implementaron buenas prácticas como validaciones, manejo de errores y organización modular del código.
 
+Proyecto Módulo 8 - API REST con Autenticación JWT
+
+Este proyecto corresponde a la tercera etapa del desarrollo backend, donde se transforma la aplicación previa en una API REST estructurada, incorporando autenticación mediante JSON Web Tokens (JWT), rutas protegidas y subida de archivos.
+
+Se implementa una arquitectura modular separando responsabilidades en controllers, routes y middlewares, siguiendo buenas prácticas de desarrollo backend.
+
+---
+Herramientas utilizadas
+
+* Node.js
+* Express.js
+* PostgreSQL
+* Sequelize (ORM)
+* JSON Web Token (JWT)
+* Multer (subida de archivos)
+* Dotenv
+
+ Instalación y ejecución
+
+1. Clonar el repositorio:
+git clone https://github.com/joNeira96/Proyecto_Modulo6.git
+`
+
+2. Instalar dependencias en la terminal 
+npm install
+
+
+3. Crear archivo .env:
+
+.env
+DB_NAME=proyecto_m7
+DB_USER=postgres
+DB_PASS=tu_contraseña
+JWT_SECRET=supersecreto
+
+4. Ejecutar servidor:
+npm run dev
+
+Servidor disponible en:
+http://localhost:3000
+
+
+Esqueleto del proyecto
+src/
+ ├── config/
+ ├── controllers/
+ ├── middlewares/
+ ├── models/
+ ├── routes/
+ ├── views/
+ ├── public/
+uploads/
+
+
+A. Autenticación JWT
+
+Se implementó un sistema de autenticación basado en tokens.
+
+Login:
+
+POST /api/login
+
+Body:
+
+json
+{
+  "email": "test@email.com"
+}
+
+
+Respuesta:
+
+json
+{
+  "token": "xxxxx"
+}
+
+
+---
+
+B. Rutas protegidas
+
+Ejemplo:
+GET /api/perfil
+
+Header requerido:
+
+Authorization: Bearer TOKEN
+
+
+---
+
+C.Funcionalidades implementadas
+
+* API REST con Express
+* CRUD de usuarios con Sequelize
+* Autenticación con JWT
+* Middleware de protección de rutas
+* Manejo de errores
+* Subida de archivos con Multer
+* Uso de variables de entorno
+* Separación en controllers y middlewares
+* Uso de prefijo `/api` para rutas backend
+
+---
+Subida de archivos
+
+
+POST /upload
+
+
+Body: form-data
+Key: file
+
+---
+ Pruebas
+
+Las rutas fueron probadas con Postman, validando:
+
+* Generación de token
+* Acceso a rutas protegidas
+* Bloqueo sin token
+* CRUD de usuarios
+* Subida de archivos
+
+---
+
+CONCLUSIÓN
+En este módulo implementamosun sistema de autenticación real utilizando JWT, permitiendo proteger rutas y asegurar el acceso a los recursos de la API a nuestra aplicación. 
+
+Comprendimos la importancia de separar responsabilidades en el código, utilizando controllers y middlewares, lo que mejora la escalabilidad y mantenimiento del proyecto.
+
+

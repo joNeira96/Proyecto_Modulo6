@@ -104,3 +104,6 @@ http://localhost:3000
 4. Hacer click en el servidor para visualizar la página dinámica que tambien puede dirigirte a la página estática. 
 
 ______________________________________________________
+
+
+Integración Modulo 7 

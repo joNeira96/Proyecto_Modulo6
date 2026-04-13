@@ -1,11 +1,20 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
-    const token = req.headers["authorization"];
+    const authHeader = req.headers["authorization"];
 
-    if (!token) {
+    if (!authHeader) {
         return res.status(403).json({
             message: "Token requerido"
+        });
+    }
+
+   
+    const token = authHeader.split(" ")[1];
+
+    if (!token) {
+        return res.status(401).json({
+            message: "Token inválido"
         });
     }
 
@@ -14,6 +23,7 @@ module.exports = (req, res, next) => {
         req.user = decoded;
         next();
     } catch (error) {
+        console.error("JWT ERROR:", error.message); 
         return res.status(401).json({
             message: "Token inválido"
         });

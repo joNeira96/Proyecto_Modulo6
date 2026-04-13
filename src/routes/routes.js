@@ -1,6 +1,11 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router(); 
 const fs = require("fs");
+
+router.get("/api/test", (req, res) => {
+    res.json({ message: "FUNCIONA" });
+});
+console.log("routes cargadas"); // consolelog probando un error
 
 // controllers
 const userController = require("../controllers/userController");
@@ -41,7 +46,7 @@ function registrarAcceso(ruta) {
 // AUTH (JWT)
 
 
-router.post("/login", authController.login);
+router.post("/api/login", authController.login);
 
 
 
@@ -62,7 +67,7 @@ router.get("/api/perfil", authMiddleware, (req, res) => {
 // CRUD USUARIOS (CONTROLLERS)
 
 
-router.get("/usuarios", userController.getUsers);
+router.get("api/usuarios", userController.getUsers);
 router.post("/usuarios", userController.createUser);
 router.put("/usuarios/:id", userController.updateUser);
 router.delete("/usuarios/:id", userController.deleteUser);

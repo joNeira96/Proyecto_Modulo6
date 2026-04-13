@@ -3,28 +3,32 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
-const sequelize = require("./src/config/database.js");
-require("./src/models/users.js"); // 
+const sequelize = require("./src/config/database");
 
-const routes = require("./src/routes/routes.js");
+// 👇 asegúrate que el nombre coincide con tu archivo
+require("./src/models/users.js");
+
+const routes = require("./src/routes/routes");
 
 const PORT = process.env.PORT || 3000;
 
 // middlewares
-app.use(express.json()); // 
+app.use(express.json());
 app.use(express.static("public"));
 
 app.set("view engine", "ejs");
 
-// rutas
-app.use(routes);
+// 👇 importante (mejor práctica)
+app.use("/", routes);
 
 // conexión + servidor
 sequelize.sync()
     .then(() => {
         console.log("Tablas creadas");
+
         app.listen(PORT, () => {
             console.log(`Servidor iniciado en http://localhost:${PORT}`);
         });
+
     })
-    .catch(err => console.log("Error:", err));
+    .catch(err => console.log(" Error:", err));

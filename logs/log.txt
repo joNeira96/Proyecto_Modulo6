@@ -27,3 +27,4 @@
 13/4/2026 - 11:05:29 - Ruta: /usuarios
 13/4/2026 - 11:06:19 - Ruta: PUT /usuarios
 13/4/2026 - 11:07:07 - Ruta: DELETE /usuarios
+13/4/2026 - 15:09:13 - Ruta: /api/perfil

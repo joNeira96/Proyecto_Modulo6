@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
-const User = require("../models/users.js");
+
+// modelos
+const User = require("../models/User");
+const sequelize = require("../config/database");
 
 // función log
 function registrarAcceso(ruta) {
@@ -14,82 +17,175 @@ function registrarAcceso(ruta) {
     });
 }
 
-router.get("/", (req, res) => {
+// RUTAS (MÓDULO 6)
 
+
+router.get("/", (req, res) => {
     registrarAcceso("/");
 
     res.render("index", {
         titulo: "Servidor Node.js",
         mensaje: "Vista dinámica usando EJS"
     });
-
 });
 
 router.get("/status", (req, res) => {
-
     registrarAcceso("/status");
 
     res.json({
         status: "ok",
         message: "Servidor funcionando correctamente"
     });
-
 });
 
 
 
-// CRUD Modulo 7 
+// CRUD (MÓDULO 7)
+// actualizado manejo de errores + mensajes
 
 
-// GET
+// GET con filtro opcional
 router.get("/usuarios", async (req, res) => {
     registrarAcceso("/usuarios");
 
     try {
-        const users = await User.findAll();
+        const { nombre } = req.query;
+
+        let users;
+
+        if (nombre) {
+            users = await User.findAll({
+                where: { nombre }
+            });
+        } else {
+            users = await User.findAll();
+        }
+
         res.json(users);
+
     } catch (error) {
-        res.status(500).json({ message: "Error al obtener usuarios" });
+        res.status(500).json({
+            message: "Error al obtener usuarios",
+            error: error.message
+        });
     }
 });
 
-// POST
+
+// POST (con validación)
 router.post("/usuarios", async (req, res) => {
     registrarAcceso("POST /usuarios");
 
     try {
-        const user = await User.create(req.body);
-        res.json(user);
+        const { nombre, email } = req.body;
+
+        // validación
+        if (!nombre || !email) {
+            return res.status(400).json({
+                message: "Nombre y email son obligatorios"
+            });
+        }
+
+        const user = await User.create({ nombre, email });
+
+        res.status(201).json({
+            message: "Usuario creado",
+            data: user
+        });
+
     } catch (error) {
-        res.status(500).json({ message: "Error al crear usuario" });
+        res.status(500).json({
+            message: "Error al crear usuario",
+            error: error.message
+        });
     }
 });
 
-// PUT
+
+// PUT (actualizar)
 router.put("/usuarios/:id", async (req, res) => {
     registrarAcceso("PUT /usuarios");
 
     try {
-        await User.update(req.body, {
+        const [updated] = await User.update(req.body, {
             where: { id: req.params.id }
         });
-        res.json({ message: "Usuario actualizado" });
+
+        if (!updated) {
+            return res.status(404).json({
+                message: "Usuario no encontrado"
+            });
+        }
+
+        res.json({
+            message: "Usuario actualizado"
+        });
+
     } catch (error) {
-        res.status(500).json({ message: "Error al actualizar usuario" });
+        res.status(500).json({
+            message: "Error al actualizar usuario",
+            error: error.message
+        });
     }
 });
 
-// DELETE
+
+// DELETE (eliminar)
 router.delete("/usuarios/:id", async (req, res) => {
     registrarAcceso("DELETE /usuarios");
 
     try {
-        await User.destroy({
+        const deleted = await User.destroy({
             where: { id: req.params.id }
         });
-        res.json({ message: "Usuario eliminado" });
+
+        if (!deleted) {
+            return res.status(404).json({
+                message: "Usuario no encontrado"
+            });
+        }
+
+        res.json({
+            message: "Usuario eliminado"
+        });
+
     } catch (error) {
-        res.status(500).json({ message: "Error al eliminar usuario" });
+        res.status(500).json({
+            message: "Error al eliminar usuario",
+            error: error.message
+        });
+    }
+});
+
+
+
+// TRANSACCIÓN (PLUS)
+
+
+router.post("/registro-completo", async (req, res) => {
+    registrarAcceso("POST /registro-completo");
+
+    const t = await sequelize.transaction();
+
+    try {
+        const user = await User.create(req.body, { transaction: t });
+
+        if (!user) throw new Error("Error en registro");
+
+        await t.commit();
+
+        res.json({
+            message: "Registro exitoso",
+            data: user
+        });
+
+    } catch (error) {
+        await t.rollback();
+
+        res.status(500).json({
+            message: "Error, rollback ejecutado",
+            error: error.message
+        });
     }
 });
 

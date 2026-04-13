@@ -3,11 +3,11 @@ const router = express.Router();
 const fs = require("fs");
 
 // controllers
-const userController = require("../controllers/userController.js");
-const authController = require("../controllers/authController.js");
+const userController = require("../controllers/userController");
+const authController = require("../controllers/authController");
 
-// middlewares
-const authMiddleware = require("../middlewares/authMiddleware.js");
+// middleware
+const authMiddleware = require("../middlewares/authMiddleware");
 
 // upload
 const multer = require("multer");
@@ -38,31 +38,24 @@ function registrarAcceso(ruta) {
 
 
 
-// RUTAS BASE (MÓDULO 6)
-
-
-router.get("/", (req, res) => {
-    registrarAcceso("/");
-    res.render("index", {
-        titulo: "Servidor Node.js",
-        mensaje: "Vista dinámica usando EJS"
-    });
-});
-
-router.get("/status", (req, res) => {
-    registrarAcceso("/status");
-    res.json({
-        status: "ok",
-        message: "Servidor funcionando correctamente"
-    });
-});
-
-
-
 // AUTH (JWT)
 
 
 router.post("/login", authController.login);
+
+
+
+//  RUTA PROTEGIDA 
+
+
+router.get("/api/perfil", authMiddleware, (req, res) => {
+    registrarAcceso("/api/perfil");
+
+    res.json({
+        message: "Ruta protegida",
+        user: req.user
+    });
+});
 
 
 
@@ -76,18 +69,7 @@ router.delete("/usuarios/:id", userController.deleteUser);
 
 
 
-// RUTAS PROTEGIDAS 
-
-
-router.get("/perfil", authMiddleware, (req, res) => {
-    res.json({
-        message: "Ruta protegida",
-        user: req.user
-    });
-});
-
-
-// SUBIr DE ARCHIVOS
+// UPLOAD
 
 
 router.post("/upload", upload.single("file"), (req, res) => {
@@ -102,6 +84,29 @@ router.post("/upload", upload.single("file"), (req, res) => {
     res.json({
         message: "Archivo subido correctamente",
         file: req.file
+    });
+});
+
+
+
+// RUTAS WEB 
+
+
+router.get("/status", (req, res) => {
+    registrarAcceso("/status");
+
+    res.json({
+        status: "ok",
+        message: "Servidor funcionando correctamente"
+    });
+});
+
+router.get("/", (req, res) => {
+    registrarAcceso("/");
+
+    res.render("index", {
+        titulo: "Servidor Node.js",
+        mensaje: "Vista dinámica usando EJS"
     });
 });
 

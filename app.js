@@ -3,10 +3,10 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
-const sequelize = require("./src/config/database");
+const sequelize = require("./src/config/database.js");
 require("./src/models/users.js"); // 
 
-const routes = require("./src/routes/routes");
+const routes = require("./src/routes/routes.js");
 
 const PORT = process.env.PORT || 3000;
 
@@ -27,4 +27,4 @@ sequelize.sync()
             console.log(`Servidor iniciado en http://localhost:${PORT}`);
         });
     })
-    .catch(err => console.log("❌ Error:", err));
+    .catch(err => console.log("Error:", err));

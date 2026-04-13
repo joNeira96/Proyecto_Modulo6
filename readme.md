@@ -107,3 +107,108 @@ ______________________________________________________
 
 
 Integración Modulo 7 
+
+ACTUALIZACIÓN README Proyecto Módulo 7 - Node.js & Express
+
+
+Este proyecto corresponde a la segunda etapa del desarrollo backen solicitado, donde incorporamos a la aplicación creada en el Módulo 6, una base de datos relacional y operaciones CRUD utilizando Sequelize como ORM.
+
+La aplicación permite gestionar usuarios, almacenando la información en una base de datos PostgreSQL y exponiendo rutas para crear, leer, actualizar y eliminar registros.
+
+______________________
+
+Herramientas utilizadas
+
+* Node.js
+* Express.js
+* PostgreSQL
+* Sequelize (ORM)
+* EJS
+* Dotenv
+
+___________________________________
+
+Instalación y ejecución
+Para ejecutar el proyecto es necesario lo siguiente 
+
+1. Clonar el repositorio:
+
+git clone https://github.com/joNeira96/Proyecto_Modulo6.git
+
+2. Instalar dependencias:
+
+En la terminal bash
+npm install
+
+
+3. en el archivo “.env” modificar la contraseña: 
+DB_PASS=tu_contraseña
+
+
+4. Ejecutar el servidor:
+
+En la terminal bash
+npm run dev
+
+Correcto: 
+El servidor estará disponible en:
+http://localhost:3000
+
+Continuar con las pruebas correspondientes. 
+
+ Funcionalidades implementadas
+
+A.Módulo 6
+
+* Servidor Express
+* Rutas básicas
+* Renderizado con EJS
+* Registro de logs
+
+B.Módulo 7
+
+* Conexión a base de datos PostgreSQL
+* Uso de Sequelize como ORM
+* Modelo User
+* CRUD completo de usuarios:
+
+  * GET /usuarios
+  * POST /usuarios
+  * PUT /usuarios/:id
+  * DELETE /usuarios/:id
+* Validaciones en creación de usuarios
+* Manejo de errores
+* Filtro por query params (`?nombre=Juan`)
+* Implementación de transacciones
+
+---
+
+C.Pruebas
+
+Las rutas fueron probadas mediante Postman, verificando:
+
+* Creación de usuarios
+* Consulta de registros
+* Actualización de datos
+* Eliminación de registros
+
+Las cuales se encuentran adjuntadas al Drive 
+
+____________________________________________
+
+ Estructura del proyecto
+
+
+src/
+ ├── config/
+ ├── models/
+ ├── routes/
+ ├── views/
+ ├── public/
+
+_______________________________________________________
+Conclusión
+Durante este proyecto logramos integrar una base de datos real a la aplicación, permitiendo trabajar con persistencia de datos mediante un ORM. Sequelize nos ayudó a  la gestión de modelos y consultas, reduciendo la complejidad del uso de SQL directo.
+
+Además, se implementaron buenas prácticas como validaciones, manejo de errores y organización modular del código.
+
